@@ -81,6 +81,7 @@ GEM
     bootsnap (1.17.1)
       msgpack (~> 1.2)
     builder (3.2.4)
+    coderay (1.1.3)
     concurrent-ruby (1.2.3)
     connection_pool (2.4.1)
     crass (1.0.6)
@@ -88,6 +89,8 @@ GEM
     debug (1.9.1)
       irb (~> 1.10)
       reline (>= 0.3.8)
+    diff-lcs (1.5.0)
+    docile (1.4.0)
     drb (2.2.0)
       ruby2_keywords
     erubi (1.12.0)
@@ -115,6 +118,7 @@ GEM
       net-pop
       net-smtp
     marcel (1.0.2)
+    method_source (1.0.0)
     mini_mime (1.1.5)
     minitest (5.21.2)
     msgpack (1.7.2)
@@ -136,6 +140,9 @@ GEM
     nokogiri (1.16.0-x86_64-linux)
       racc (~> 1.4)
     pg (1.5.4)
+    pry (0.14.2)
+      coderay (~> 1.1)
+      method_source (~> 1.0)
     psych (5.1.2)
       stringio
     puma (6.4.2)
@@ -183,7 +190,30 @@ GEM
       psych (>= 4.0.0)
     reline (0.4.2)
       io-console (~> 0.5)
+    rspec-core (3.12.2)
+      rspec-support (~> 3.12.0)
+    rspec-expectations (3.12.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-mocks (3.12.6)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.12.0)
+    rspec-rails (6.1.1)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
+    rspec-support (3.12.1)
     ruby2_keywords (0.0.5)
+    simplecov (0.22.0)
+      docile (~> 1.1)
+      simplecov-html (~> 0.11)
+      simplecov_json_formatter (~> 0.1)
+    simplecov-html (0.12.3)
+    simplecov_json_formatter (0.1.4)
     sprockets (4.2.1)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -224,8 +254,11 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   pg (~> 1.1)
+  pry
   puma (>= 5.0)
   rails (~> 7.1.3)
+  rspec-rails
+  simplecov
   sprockets-rails
   stimulus-rails
   turbo-rails
