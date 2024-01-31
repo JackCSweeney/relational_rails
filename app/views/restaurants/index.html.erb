@@ -1,5 +1,6 @@
 <h1>Restaurants</h1>
 
-<% @restaurants.each do |restaurant| %>
+<% @restaurants.reverse_each do |restaurant| %>
     <h3><%= restaurant.name %></h3>
+    <h4>Created At: <%= restaurant.created_at %></h4>
   <% end %>
