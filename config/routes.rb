@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get "/restaurants", to: "restaurants#index"
   get "/restaurants/:id", to: "restaurants#show"
+  get "/cooks", to: "cooks#index"
 
   # Defines the root path route ("/")
   # root "posts#index"
