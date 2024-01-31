@@ -1,5 +1,6 @@
 <a href="/restaurants">Restaurants</a>
 <h1><%= @restaurant.name %></h1>
+<div id="cooks">
 <h2>Cooks</h2>
 <% @cooks.each do |cook| %>
     <h3>Name: <%= cook.name %></h3>
@@ -9,3 +10,4 @@
     <h5>Created At: <%= cook.created_at%></h5>
     <h5>Last Updated: <%= cook.updated_at%></h5>
 <% end %>
+</div>
