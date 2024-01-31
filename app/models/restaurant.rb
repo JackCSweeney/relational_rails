@@ -6,5 +6,7 @@ class Restaurant < ApplicationRecord
         end
     end
 
-
+    def cook_count
+        find_cooks.count
+    end
 end
