@@ -47,4 +47,44 @@ RSpec.describe 'the restaurants index page' do
     expect(page).to have_link('Cooks', :href=>'/cooks')
     expect(page).to have_link('Restaurants', :href=>'/restaurants')
   end
+
+  # As a visitor
+  # When I visit the Parent Index page
+  # Then I see a link to create a new Parent record, "New Parent"
+  # When I click this link
+  # Then I am taken to '/parents/new' where I  see a form for a new parent record
+  # When I fill out the form with a new parent's attributes:
+  # And I click the button "Create Parent" to submit the form
+  # Then a `POST` request is sent to the '/parents' route,
+  # a new parent record is created,
+  # and I am redirected to the Parent Index page where I see the new Parent displayed.
+
+  it 'shows a link to create a new restaurant record' do
+    visit "/restaurants"
+
+    expect(page).to have_link('New Restaurant', :href=>"/restaurants/new")
+  end
+
+  it 'can click on the link and be brought to a form to add a new restaurant' do
+    visit "/restaurants"
+
+    click_on("New Restaurant")
+
+    expect(page).to have_field("name")
+    expect(page).to have_field("dishes")
+    expect(page).to have_field("open")
+    expect(page).to have_selector('input[type=submit]')
+  end
+
+  it 'can fill out the form and submit and be brought to the /restaurants page and have the new content' do
+    visit "/restaurants/new"
+
+    fill_in "name", with: "Testaurant"
+    check "open"
+    fill_in "dishes", with: "46"
+    click_on "submit"
+
+    expect(page).to have_current_path("/restaurants")
+    expect(page).to have_content("Testaurant")
+  end    
 end

@@ -41,4 +41,15 @@ RSpec.describe 'the individual restaurant page' do
     expect(page).to have_link('Cooks', :href=>'/cooks')
     expect(page).to have_link('Restaurants', :href=>'/restaurants')
   end
+
+  it 'shows a link to the specfic cooks for the given restaurant' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+    cook_2 = restaurant_1.cooks.create!(name: "Dan 2", serv_safe_certified: true, dishes_known: 14, restaurant_id: 1)
+    cook_3 = restaurant_1.cooks.create!(name: "Dan 3", serv_safe_certified: true, dishes_known: 15, restaurant_id: 1)
+    
+    visit "/restaurants/#{restaurant_1.id}"
+
+    expect(page).to have_link('Restaurants Cooks', :href=>"/restaurants/#{restaurant_1.id}/cooks")
+  end
 end
