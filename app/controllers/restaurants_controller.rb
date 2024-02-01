@@ -24,4 +24,19 @@ class RestaurantsController < ApplicationController
       @cooks = show.find_cooks
   end
 
+  def edit
+    @restaurant = Restaurant.find(params[:id])
+  end
+
+  def update
+    restaurant = Restaurant.find(params[:id])
+    restaurant.update({
+      name: params[:name],
+      open: params[:open],
+      dishes: params[:dishes]
+    })
+    restaurant.save
+    redirect_to "/restaurants/#{restaurant.id}"
+  end
+
 end
