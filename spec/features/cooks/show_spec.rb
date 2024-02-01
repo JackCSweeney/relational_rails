@@ -18,4 +18,14 @@ RSpec.describe '/cooks/:id page' do
     expect(page).not_to have_content(cook_2.dishes_known)
     expect(page).not_to have_content(cook_2.restaurant_id)
   end
+
+  it 'shows a link to the cooks index at the top of the page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+
+    visit "/cooks/#{cook_1.id}"
+
+    expect(page).to have_link('Cooks', :href=>'/cooks')
+  end
 end

@@ -31,4 +31,13 @@ RSpec.describe 'the individual restaurant page' do
 
     expect(page).to have_content("Cooks: 3")
   end
+
+  it 'shows a link to the cooks index at the top of the page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+
+    visit "/restaurants/#{restaurant_2.id}"
+
+    expect(page).to have_link('Cooks', :href=>'/cooks')
+  end
 end
