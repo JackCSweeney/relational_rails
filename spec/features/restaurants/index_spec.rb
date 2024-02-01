@@ -38,12 +38,13 @@ RSpec.describe 'the restaurants index page' do
     expect(restaurant_2.name).to appear_before(restaurant_1.name)
   end
 
-  it 'shows a link to the cooks index at the top of the page' do
+  it 'shows a link to the cooks and restaurants index at the top of the page' do
     restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
     restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
 
     visit "/restaurants"
 
     expect(page).to have_link('Cooks', :href=>'/cooks')
+    expect(page).to have_link('Restaurants', :href=>'/restaurants')
   end
 end
