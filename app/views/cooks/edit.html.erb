@@ -1,13 +1,13 @@
-<%= form_with url: "/restaurants/#{@restaurant.id}/cooks", method: :post do |form| %>
-  <p>Enter a new Cook:</p>
+<%= form_with url: "/cooks/#{@cook.id}", method: :patch do |form| %>
+  <p>Edit Cook:</p>
   <p>Name:</p>
   <%= form.label :name %>
-  <%= form.text_field :name %>
+  <%= form.text_field :name, value: "#{@cook.name}" %>
   <p>ServSafe Certification:</p>
   <%= form.label :serv_safe_certified %>
   <%= form.check_box :serv_safe_certified %>
   <p>Dishes Known:</p>
   <%= form.label :dishes_known %>
-  <%= form.text_field :dishes_known %>
+  <%= form.text_field :dishes_known, value: "#{@cook.dishes_known}" %>
   <%= form.submit 'submit' %>
   <% end %>
