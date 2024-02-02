@@ -31,7 +31,7 @@ RSpec.describe 'The Restaurant Edit page' do
     expect(page).to have_selector('input[type=submit]')
   end
 
-  it 'can fill out the form and submit it to change the attributes of the restaurant and be brought to that restaurants show page when submitted' do
+  it 'can fill out the form and submit it to change the attributes of the restaurant and be brought to that restaurants show page when submitted to see the changes' do
     restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
 
     visit "/restaurants/#{restaurant_1.id}/edit"

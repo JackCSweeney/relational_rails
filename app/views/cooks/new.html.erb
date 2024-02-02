@@ -1,0 +1,15 @@
+
+
+<%= form_with url: "/restaurants/#{@restaurant.id}/cooks", method: :post do |form| %>
+  <p>Enter a new Cook:</p>
+  <p>Name:</p>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <p>ServSafe Certification:</p>
+  <%= form.label :serv_safe_certified %>
+  <%= form.check_box :serv_safe_certified %>
+  <p>Dishes Known:</p>
+  <%= form.label :dishes_known %>
+  <%= form.text_field :dishes_known %>
+  <%= form.submit 'submit' %>
+  <% end %>

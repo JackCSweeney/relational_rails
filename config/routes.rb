@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   get "/restaurants", to: "restaurants#index"
   get "/restaurants/new", to: "restaurants#new"
   post "/restaurants", to: "restaurants#create"
+  get "/restaurants/:id/cooks/new", to: "cooks#new"
+  post "/restaurants/:id/cooks", to: "cooks#create"
   get "/restaurants/:id/edit", to: "restaurants#edit"
   patch "/restaurants/:id", to: "restaurants#update"
   get "/restaurants/:id", to: "restaurants#show"
