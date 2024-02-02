@@ -29,4 +29,5 @@ RSpec.describe '/cooks/:id page' do
     expect(page).to have_link('Cooks', :href=>'/cooks')
     expect(page).to have_link('Restaurants', :href=>'/restaurants')
   end
+
 end

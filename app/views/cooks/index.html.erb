@@ -3,11 +3,13 @@
 <h1>Cooks</h1>
 
 <% @cooks.each do |cook| %>
+  <% if cook.serv_safe_certification %>
     <h3>Name: <%= cook.name %></h3>
     <h5>Restaurant ID: <%= cook.restaurant_id %></h5>
     <h5>ServSafe Certification: <%= cook.serv_safe_certified %></h5>
     <h5>Dishes Known: <%= cook.dishes_known%></h5>
     <h5>Created At: <%= cook.created_at%></h5>
     <h5>Last Updated: <%= cook.updated_at%></h5>
+    <% end %>
 
   <% end %>
