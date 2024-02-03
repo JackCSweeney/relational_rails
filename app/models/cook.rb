@@ -4,4 +4,8 @@ class Cook < ApplicationRecord
   def serv_safe_certification
     return self if self.serv_safe_certified
   end
+
+  def self.cook_ids(cooks)
+    cooks.map{|cook| cook.id}
+  end
 end

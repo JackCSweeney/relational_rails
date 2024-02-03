@@ -43,4 +43,10 @@ class RestaurantsController < ApplicationController
     redirect_to "/restaurants/#{restaurant.id}"
   end
 
+  def destroy
+    Cook.destroy(Cook.cook_ids(cooks))
+    Restaurant.destroy(params[:id])
+    redirect_to "/restaurants"
+  end
+
 end

@@ -11,3 +11,4 @@
 <p>Cooks: <%= @restaurant.cook_count %></p>
 
 <a href="/restaurants/<%= @restaurant.id %>/edit">Update Restaurant</a>
+<p><%= link_to "Delete #{@restaurant.name}", "/restaurants/#{@restaurant.id}", method: :delete %></p>
