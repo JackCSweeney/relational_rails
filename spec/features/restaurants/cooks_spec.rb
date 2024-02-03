@@ -65,4 +65,29 @@ RSpec.describe 'the restaurants/:id/cooks page' do
     expect(cook_3.name).to appear_before(cook_2.name)
     expect(cook_2.name).to appear_before(cook_1.name)
   end
+
+  it 'shows a link to edit each specific cook on the restaurant cooks index page' do
+		restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+		visit "/restaurants/#{restaurant_1.id}/cooks"
+
+		expect(page).to have_link("Edit #{cook_1.name}", :href=>"/cooks/#{cook_1.id}/edit")
+		expect(page).to have_link("Edit #{cook_2.name}", :href=>"/cooks/#{cook_2.id}/edit")
+		expect(page).to have_link("Edit #{cook_3.name}", :href=>"/cooks/#{cook_3.id}/edit")
+	end
+
+  it 'can click on the edit link and be brought to the page to edit that specific cook' do
+		restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+		visit "/restaurants/#{restaurant_1.id}/cooks"
+		click_on "Edit #{cook_1.name}"
+
+		expect(current_path).to eq("/cooks/#{cook_1.id}/edit")
+	end
 end

@@ -10,6 +10,7 @@
     <h5>Dishes Known: <%= cook.dishes_known %></h5>
     <h5>Created At: <%= cook.created_at %></h5>
     <h5>Last Updated: <%= cook.updated_at %></h5>
+    <h5><%= link_to "Edit #{cook.name}", "/cooks/#{cook.id}/edit" %></h5>
   <% end %>
 
 <% end %>
