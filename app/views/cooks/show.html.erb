@@ -8,3 +8,4 @@
 <p>Created: <%= @cook.created_at %></p>
 <p>Last Updated: <%= @cook.updated_at %></p>
 <a href="/cooks/<%= @cook.id %>/edit">Update Cook</a>
+<p><%= link_to "Delete #{@cook.name}", "/cooks/#{@cook.id}", method: :delete %></p>

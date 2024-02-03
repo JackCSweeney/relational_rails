@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   get "/cooks/:id", to: "cooks#show"
   get "/restaurants/:id/cooks", to: "restaurants#cooks"
   delete "/restaurants/:id", to: "restaurants#destroy"
+  delete "/cooks/:id", to: "cooks#destroy"
 
   # Defines the root path route ("/")
   # root "posts#index"

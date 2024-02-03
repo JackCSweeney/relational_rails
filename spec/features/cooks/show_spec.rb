@@ -30,4 +30,35 @@ RSpec.describe '/cooks/:id page' do
     expect(page).to have_link('Restaurants', :href=>'/restaurants')
   end
 
+# As a visitor
+# When I visit a child show page
+# Then I see a link to delete the child "Delete Child"
+# When I click the link
+# Then a 'DELETE' request is sent to '/child_table_name/:id',
+# the child is deleted,
+# and I am redirected to the child index page where I no longer see this child
+  it 'shows a link to delete a cook from that cooks show page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+
+    visit "/cooks/#{cook_1.id}"
+
+    expect(page).to have_link("Delete #{cook_1.name}", :href=>"/cooks/#{cook_1.id}")
+  end
+
+  it 'can click on the delete link to delete the cook and it will delete the cook then return the user to the cooks index page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Doug", serv_safe_certified: true, dishes_known: 13)
+    cook_2 = restaurant_1.cooks.create!(name: "Dave 2", serv_safe_certified: true, dishes_known: 14)
+    cook_3 = restaurant_1.cooks.create!(name: "Dan 3", serv_safe_certified: true, dishes_known: 15)
+
+
+    visit "/cooks/#{cook_1.id}"
+    click_on "Delete #{cook_1.name}"
+
+    expect(current_path).to eq("/cooks")
+    expect(page).not_to have_content(cook_1.name)
+    expect(page).to have_content(cook_2.name)
+    expect(page).to have_content(cook_3.name)
+  end
 end

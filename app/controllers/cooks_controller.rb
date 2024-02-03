@@ -37,5 +37,10 @@ class CooksController < ApplicationController
     cook.save
     redirect_to "/cooks/#{cook.id}"
   end
+
+  def destroy
+    Cook.destroy(params[:id])
+    redirect_to "/cooks"
+  end
   
 end
