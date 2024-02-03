@@ -100,8 +100,8 @@ RSpec.describe 'the restaurants index page' do
 
     visit "/restaurants"
 
-    expect(page).to have_link("/restaurants/#{restaurant_1.id}/edit")
-    expect(page).to have_link("/restaurants/#{restaurant_2.id}/edit")
+    expect(page).to have_link("Edit #{restaurant_1.name}", :href=>"/restaurants/#{restaurant_1.id}/edit")
+    expect(page).to have_link("Edit #{restaurant_2.name}", :href=>"/restaurants/#{restaurant_2.id}/edit")
   end
 
   it 'can click the link and be taken to that restaurants edit page' do

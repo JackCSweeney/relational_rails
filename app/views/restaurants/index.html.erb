@@ -5,5 +5,6 @@
 <% @restaurants.reverse_each do |restaurant| %>
     <h3><%= restaurant.name %></h3>
     <h4>Created At: <%= restaurant.created_at %></h4>
+    <h5><%= link_to "Edit #{restaurant.name}", "/restaurants/#{restaurant.id}/edit" %></h5>
   <% end %>
 <a href="/restaurants/new">New Restaurant</a>
