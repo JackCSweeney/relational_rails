@@ -86,5 +86,32 @@ RSpec.describe 'the restaurants index page' do
 
     expect(page).to have_current_path("/restaurants")
     expect(page).to have_content("Testaurant")
-  end    
+  end
+  
+# As a visitor
+# When I visit the parent index page
+# Next to every parent, I see a link to edit that parent's info
+# When I click the link
+# I should be taken to that parent's edit page where I can update its information just like in User Story 12
+
+  it 'shows the link to edit a specific restaurant next to each restaurant' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+
+    visit "/restaurants"
+
+    expect(page).to have_link("/restaurants/#{restaurant_1.id}/edit")
+    expect(page).to have_link("/restaurants/#{restaurant_2.id}/edit")
+  end
+
+  it 'can click the link and be taken to that restaurants edit page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+
+    visit "/restaurants"
+    click_on "Edit #{restaurant_1.name}"
+
+    expect(current_path).to eq("/restaurants/#{restaurant_1.id}/edit")
+  end
+
 end

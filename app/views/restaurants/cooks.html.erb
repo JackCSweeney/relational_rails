@@ -12,4 +12,6 @@
     <h5>Last Updated: <%= cook.updated_at%></h5>
 <% end %>
 </div>
+
 <a href="/restaurants/<%= @restaurant.id %>/cooks/new">Create Cook</a>
+<p><%= link_to "Sort by Name", :sort => "name" %></p>

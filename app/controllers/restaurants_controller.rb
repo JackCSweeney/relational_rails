@@ -21,7 +21,11 @@ class RestaurantsController < ApplicationController
   end
       
   def cooks
+    if params[:sort] == "name"
+      @cooks = show.find_cooks.sort_by {|cook| cook.name}
+    else
       @cooks = show.find_cooks
+    end
   end
 
   def edit
