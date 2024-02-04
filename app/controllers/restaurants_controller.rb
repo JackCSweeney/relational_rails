@@ -23,6 +23,8 @@ class RestaurantsController < ApplicationController
   def cooks
     if params[:sort] == "name"
       @cooks = show.find_cooks.sort_by {|cook| cook.name}
+    elsif params[:search] != nil
+      @cooks = show.find_cooks.find_all {|cook| cook.dishes_known >= params[:search].to_i}
     else
       @cooks = show.find_cooks
     end

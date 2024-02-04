@@ -90,4 +90,37 @@ RSpec.describe 'the restaurants/:id/cooks page' do
 
 		expect(current_path).to eq("/cooks/#{cook_1.id}/edit")
 	end
+
+# As a visitor
+# When I visit the Parent's children Index Page
+# I see a form that allows me to input a number value
+# When I input a number value and click the submit button that reads 'Only return records with more than `number` of `column_name`'
+# Then I am brought back to the current index page with only the records that meet that threshold shown.
+
+  it 'has a form that allows input of a number value on the restaurant cooks index page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+    visit "/restaurants/#{restaurant_1.id}/cooks"
+
+    expect(page).to have_field("number_of_dishes_known")
+  end
+
+  it 'can enter an integer into the form to return records with more dishes known that what was input' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+    visit "/restaurants/#{restaurant_1.id}/cooks"
+    fill_in "number_of_dishes_known", with: 11
+    click_on "search"
+
+    expect(page).to have_content(cook_1.name)
+    expect(page).not_to have_content(cook_2.name)
+    expect(page).not_to have_content(cook_3.name)
+  end    
+    
 end

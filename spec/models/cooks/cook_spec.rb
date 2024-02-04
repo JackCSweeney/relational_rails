@@ -26,4 +26,5 @@ RSpec.describe Cook do
       expect(Cook.cook_ids(cooks)).to eq([cook_1.id, cook_2.id])
     end
   end
+
 end
