@@ -141,5 +141,30 @@ RSpec.describe 'the restaurants index page' do
     expect(page).to have_content(restaurant_2.name)
   end
 
+# As a visitor
+# When I visit the Parents Index Page
+# Then I see a link to sort parents by the number of `child_table_name` they have
+# When I click on the link
+# I'm taken back to the Parent Index Page where I see all of the parents in order of their count of `child_table_name` (highest to lowest) And, I see the number of children next to each parent name
 
+  it 'can sort the restaurants by number of cooks' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+    restaurant_3 = Restaurant.create!(name: "Paul's", open: true, dishes: 5)
+    cook_1 = restaurant_1.cooks.create!(name: "Doug", serv_safe_certified: true, dishes_known: 13)
+    cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 14)
+    cook_3 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 15)
+    cook_4 = restaurant_2.cooks.create!(name: "Dan 2", serv_safe_certified: true, dishes_known: 15)
+    cook_5 = restaurant_3.cooks.create!(name: "Dan 4", serv_safe_certified: true, dishes_known: 15)
+    cook_6 = restaurant_3.cooks.create!(name: "Dan 5", serv_safe_certified: true, dishes_known: 15)
+
+    visit "/restaurants"
+
+    expect(page).to have_link("Sort by Number of Cooks", :href=>"/restaurants?sort=cook_count")
+
+    click_on "Sort by Number of Cooks"
+save_and_open_page
+    expect(restaurant_1.name).to appear_before(restaurant_3.name)
+    expect(restaurant_3.name).to appear_before(restaurant_2.name)
+  end
 end

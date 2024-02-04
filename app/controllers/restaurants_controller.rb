@@ -1,6 +1,12 @@
 class RestaurantsController < ApplicationController
   def index
-      @restaurants = Restaurant.all
+    if params[:sort] == "cook_count"
+      @restaurants = Restaurant.all.sort_by do |restaurant| 
+        restaurant.cook_count
+      end.reverse
+    else
+      @restaurants = Restaurant.all.reverse
+    end
   end
   
   def new
