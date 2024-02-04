@@ -73,4 +73,38 @@ RSpec.describe 'the cooks index page' do
 
 		expect(current_path).to eq("/cooks/#{cook_1.id}/edit")
 	end
+
+# As a visitor
+# When I visit the `child_table_name` index page or a parent `child_table_name` index page
+# Next to every child, I see a link to delete that child
+# When I click the link
+# I should be taken to the `child_table_name` index page where I no longer see that child
+
+	it 'can see a link to delete each cook on the cooks index page' do
+		restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+		visit "/cooks"
+
+		expect(page).to have_link("Delete #{cook_1.name}", :href=>"/cooks/#{cook_1.id}")
+		expect(page).to have_link("Delete #{cook_2.name}", :href=>"/cooks/#{cook_2.id}")
+		expect(page).to have_link("Delete #{cook_3.name}", :href=>"/cooks/#{cook_3.id}")
+	end
+
+	it 'can click the link to delete the cook from the index page and be returned to the index with that cook removed' do
+		restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    cook_1 = restaurant_1.cooks.create!(name: "Dan", serv_safe_certified: true, dishes_known: 13, restaurant_id: 1)
+		cook_2 = restaurant_1.cooks.create!(name: "Dave", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+		cook_3 = restaurant_1.cooks.create!(name: "Dusty", serv_safe_certified: true, dishes_known: 10, restaurant_id: 1)
+
+		visit "/cooks"
+		click_on "Delete #{cook_1.name}"
+
+		expect(current_path).to eq("/cooks")
+		expect(page).not_to have_content(cook_1.name)
+		expect(page).to have_content(cook_2.name)
+		expect(page).to have_content(cook_3.name)
+	end
 end
