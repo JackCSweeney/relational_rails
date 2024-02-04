@@ -114,4 +114,32 @@ RSpec.describe 'the restaurants index page' do
     expect(current_path).to eq("/restaurants/#{restaurant_1.id}/edit")
   end
 
+# As a visitor
+# When I visit the parent index page
+# Next to every parent, I see a link to delete that parent
+# When I click the link
+# I am returned to the Parent Index Page where I no longer see that parent
+
+  it 'shows a link to delete a restaurant next to each restauranton the restaurant index page' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+    visit "/restaurants"
+    # this currently works in testing. when doing live on the server however, it needs to be switch to a button in order for it to work correctly unless I were to add 'data: {turbo_method: :delete}' to the link_to method which i'm not fully certain on how it works
+    expect(page).to have_link("Delete #{restaurant_1.name}", :href=>"/restaurants/#{restaurant_1.id}")
+    expect(page).to have_link("Delete #{restaurant_2.name}", :href=>"/restaurants/#{restaurant_2.id}")
+  end
+
+  it 'can click the link to delete the restaurant and will be returned to the restaurant index page with that restaurant now removed' do
+    restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+    restaurant_2 = Restaurant.create!(name: "Pam's", open: true, dishes: 5)
+
+    visit "/restaurants"
+    click_on "Delete #{restaurant_1.name}"
+
+    expect(current_path).to eq("/restaurants")
+    expect(page).not_to have_content(restaurant_1.name)
+    expect(page).to have_content(restaurant_2.name)
+  end
+
+
 end

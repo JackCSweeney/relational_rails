@@ -82,6 +82,7 @@ RSpec.describe 'the individual restaurant page' do
 
     expect(current_path).to eq("/restaurants")
     expect(page).not_to have_content(restaurant_1.name)
+    expect(page).to have_content(restaurant_2.name)
 
     visit "/cooks"
 
