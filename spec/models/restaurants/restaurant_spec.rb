@@ -1,6 +1,9 @@
 require 'rails_helper' 
 
 RSpec.describe Restaurant do
+
+  it {should have_many(:cooks)}
+  
   describe '#find_cooks' do  
     it 'can find all cooks based on a restaurant id' do
       restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)

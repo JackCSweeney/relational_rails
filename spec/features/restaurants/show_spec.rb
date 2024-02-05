@@ -66,7 +66,7 @@ RSpec.describe 'the individual restaurant page' do
 
     visit "/restaurants/#{restaurant_1.id}"
 
-    expect(page).to have_link("Delete #{restaurant_1.name}", :href=>"/restaurants/#{restaurant_1.id}")
+    expect(page).to have_button("Delete #{restaurant_1.name}")
   end
 
   it 'can click on the delete link to delete the record and it will delete the restaurant along with all cooks associated with the restaurant' do
