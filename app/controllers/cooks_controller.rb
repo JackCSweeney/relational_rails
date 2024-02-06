@@ -14,11 +14,7 @@ class CooksController < ApplicationController
 
   def create
     @restaurant = Restaurant.find(params[:id])
-    cook = @restaurant.cooks.new({
-        name: params[:name],
-        serv_safe_certified: params[:serv_safe_certified],
-        dishes_known: params[:dishes_known]
-    })
+    cook = @restaurant.cooks.new(cook_params)
     cook.save 
     redirect_to "/restaurants/#{@restaurant.id}/cooks"
   end
@@ -29,11 +25,7 @@ class CooksController < ApplicationController
 
   def update
     cook = Cook.find(params[:id])
-    cook.update({
-      name: params[:name],
-      serv_safe_certified: params[:serv_safe_certified],
-      dishes_known: params[:dishes_known]
-    })
+    cook.update(cook_params)
     cook.save
     redirect_to "/cooks/#{cook.id}"
   end
@@ -41,6 +33,11 @@ class CooksController < ApplicationController
   def destroy
     Cook.destroy(params[:id])
     redirect_to "/cooks"
+  end
+
+private
+  def cook_params
+    params.permit(:name, :serv_safe_certified, :dishes_known)
   end
   
 end
