@@ -9,4 +9,8 @@ class Restaurant < ApplicationRecord
     def cook_count
         find_cooks.count
     end
+
+    def self.sort_by_creation
+        order(created_at: :desc)
+    end
 end

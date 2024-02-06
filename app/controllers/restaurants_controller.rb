@@ -5,7 +5,7 @@ class RestaurantsController < ApplicationController
         restaurant.cook_count
       end.reverse
     else
-      @restaurants = Restaurant.all.reverse
+      @restaurants = Restaurant.sort_by_creation
     end
   end
   

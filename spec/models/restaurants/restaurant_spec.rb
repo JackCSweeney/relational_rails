@@ -27,4 +27,16 @@ RSpec.describe Restaurant do
       expect(restaurant_1.cook_count).to eq(3)
     end
   end
+
+  describe '#sort_by_creation' do
+    it 'can sort the restaurants in the order of creation' do
+      restaurant_1 = Restaurant.create!(name: "Proto's", open: true, dishes: 25)
+      sleep 1
+      restaurant_2 = Restaurant.create!(name: "Paul's", open: true, dishes: 25)
+      sleep 1
+      restaurant_3 = Restaurant.create!(name: "Pam's", open: true, dishes: 25)
+
+      expect(Restaurant.sort_by_creation).to eq([restaurant_3, restaurant_2, restaurant_1])
+    end
+  end
 end
