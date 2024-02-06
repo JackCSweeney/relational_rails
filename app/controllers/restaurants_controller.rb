@@ -13,11 +13,7 @@ class RestaurantsController < ApplicationController
   end
 
   def create
-    restaurant = Restaurant.new({
-      name: params[:name],
-      open: params[:open],
-      dishes: params[:dishes]
-    })
+    restaurant = Restaurant.new(restaurant_params)
     restaurant.save
     redirect_to "/restaurants"
   end
@@ -42,11 +38,7 @@ class RestaurantsController < ApplicationController
 
   def update
     restaurant = Restaurant.find(params[:id])
-    restaurant.update({
-      name: params[:name],
-      open: params[:open],
-      dishes: params[:dishes]
-    })
+    restaurant.update(restaurant_params)
     restaurant.save
     redirect_to "/restaurants/#{restaurant.id}"
   end
@@ -55,6 +47,11 @@ class RestaurantsController < ApplicationController
     Cook.destroy(Cook.cook_ids(cooks))
     Restaurant.destroy(params[:id])
     redirect_to "/restaurants"
+  end
+
+private
+  def restaurant_params
+    params.permit(:name, :open, :dishes)
   end
 
 end
