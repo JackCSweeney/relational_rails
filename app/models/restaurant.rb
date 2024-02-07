@@ -8,6 +8,12 @@ class Restaurant < ApplicationRecord
         find_cooks.count
     end
 
+    def self.order_by_cooks
+        all.sort_by do |restaurant|
+            restaurant.cook_count
+        end.reverse
+    end
+
     def self.sort_by_creation
         order(created_at: :desc)
     end

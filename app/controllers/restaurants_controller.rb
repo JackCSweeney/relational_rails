@@ -1,9 +1,7 @@
 class RestaurantsController < ApplicationController
   def index
     if params[:sort] == "cook_count"
-      @restaurants = Restaurant.all.sort_by do |restaurant| 
-        restaurant.cook_count
-      end.reverse
+      @restaurants = Restaurant.order_by_cooks
     else
       @restaurants = Restaurant.sort_by_creation
     end
@@ -53,5 +51,7 @@ private
   def restaurant_params
     params.permit(:name, :open, :dishes)
   end
+
+  # some of the logic from the index methods could potentially be captured here in the private methods to keep things restful/utilizing CRUD
 
 end
