@@ -54,4 +54,6 @@ private
     params.permit(:name, :open, :dishes)
   end
 
+  # some of the logic from the index methods could potentially be captured here in the private methods to keep things restful/utilizing CRUD
+
 end

@@ -161,10 +161,12 @@ RSpec.describe 'the restaurants index page' do
     visit "/restaurants"
 
     expect(page).to have_link("Sort by Number of Cooks", :href=>"/restaurants?sort=cook_count")
-
     click_on "Sort by Number of Cooks"
 
     expect(restaurant_1.name).to appear_before(restaurant_3.name)
     expect(restaurant_3.name).to appear_before(restaurant_2.name)
+    expect(page).to have_content("Cooks: 3")
+    expect(page).to have_content("Cooks: 2")
+    expect(page).to have_content("Cooks: 1")
   end
 end
